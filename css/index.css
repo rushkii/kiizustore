@@ -5,10 +5,12 @@ body{
     min-height: 100vh;
     background: #131313;
     overflow: hidden;
+    background-color: var(--block-bg-color);
 }
 
 .container {
     position: relative;
+    left: 30px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -65,5 +67,5 @@ body{
 
 @font-face {
     font-family: 'genshin';
-    src: url('/font/genshin-ja-jp.ttf');
+    src: url('../font/genshin-ja-jp.ttf');
 }
