@@ -3,6 +3,7 @@ function sendData() {
 }
 
 function init() {
+    $(".order").html("Halo hihihi")
     Telegram.WebApp.ready()
     Telegram.WebApp.MainButton.show()
 	Telegram.WebApp.MainButton
