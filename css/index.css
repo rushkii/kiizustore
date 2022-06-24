@@ -4,7 +4,7 @@ body{
     align-items: center;
     min-height: 100vh;
     background: #131313;
-    overflow: hidden;
+    overflow: scroll;
     background-color: var(--block-bg-color);
 }
 
