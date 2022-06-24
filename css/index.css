@@ -9,7 +9,7 @@ body{
 
 .container {
     position: relative;
-    left: 10px;
+    left: 13px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
