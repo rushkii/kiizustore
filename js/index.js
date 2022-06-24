@@ -4,5 +4,5 @@ function init() {
 	Telegram.WebApp.MainButton.setText('Ok')
     Telegram.WebApp.sendData('test_data')
 }
-
+//
 document.addEventListener('DOMContentLoaded', init)
