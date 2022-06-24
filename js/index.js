@@ -1,5 +1,9 @@
 function sendData() {
-    Telegram.WebApp.sendData('test_data')
+    Telegram.WebApp.MainButton.setParams({
+        is_visible: true,
+        text: 'VIEW ORDER',
+        color: '#31b545'
+      }).hideProgress();
 }
 
 function init() {
