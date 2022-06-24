@@ -1,7 +1,7 @@
 body{
-    /* display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center; */
+    align-items: center;
     min-height: 100vh;
     background: #131313;
     overflow-x: hidden;
@@ -9,9 +9,9 @@ body{
 
 .container {
     position: relative;
-    left: 15px;
+    left: 18px;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .container .card {
