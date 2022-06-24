@@ -9,9 +9,11 @@ body{
 
 .container {
     position: relative;
-    left: 18px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
 }
 
 .container .card {
