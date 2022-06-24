@@ -3,7 +3,7 @@ function sendData() {
         is_visible: true,
         text: 'VIEW ORDER',
         color: '#31b545'
-      }).hideProgress();
+      }).show();
 }
 
 function init() {
