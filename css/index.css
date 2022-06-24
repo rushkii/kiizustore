@@ -4,13 +4,12 @@ body{
     align-items: center;
     min-height: 100vh;
     background: #131313;
-    overflow: scroll;
-    background-color: var(--block-bg-color);
+    overflow-x: hidden;
 }
 
 .container {
     position: relative;
-    left: 15px;
+    left: 18px;
     display: flex;
     flex-wrap: wrap;
 }
