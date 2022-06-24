@@ -1,4 +1,5 @@
 function sendData() {
+    $(".order").html("OK BUTTON")
     Telegram.WebApp.MainButton.setParams({
         is_visible: true,
         text: 'OK',
