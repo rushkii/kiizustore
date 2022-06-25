@@ -5,14 +5,9 @@
   })(jQuery);
   
   var Kiizustore = {
-    canPay: true,
-    modeOrder: true,
-    totalPrice: 29,
-    apiUrl: "",
-    userId: 0,
-    userHash: "",
-    isClosed: false,
-    isLoading: false,
+    canPay: false,
+    modeOrder: false,
+    totalPrice: 0,
   
     init: function(options) {
       console.log("READY")
@@ -118,14 +113,14 @@
         } else {
           mainButton.setParams({
             is_visible: !!Kiizustore.canPay,
-            text: 'PAY ' + Kiizustore.formatPrice(Kiizustore.totalPrice),
+            text: 'VIEW ORDER',
             color: '#31b545'
           }).hideProgress();
         }
       } else {
         mainButton.setParams({
           is_visible: !!Kiizustore.canPay,
-          text: 'VIEW ORDER',
+          text: 'PAY ' + Kiizustore.formatPrice(Kiizustore.totalPrice),
           color: '#31b545'
         }).hideProgress();
       }
