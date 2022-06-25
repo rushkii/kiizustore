@@ -348,7 +348,8 @@ body.order-mode .order-overview {
   font-weight: 650;
   cursor: pointer;
   font-family: var(--apple-font);
-  color: var(--accent-color);
+  color: var(--page-hint-color);
+  text-decoration: underline;
 }
 
 .order-item {

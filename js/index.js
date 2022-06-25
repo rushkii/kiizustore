@@ -10,18 +10,13 @@
     totalPrice: 0,
   
     init: function(options) {
-      console.log("READY")
       Telegram.WebApp.ready();
       Kiizustore.apiUrl = options.apiUrl;
       Kiizustore.userId = options.userId;
       Kiizustore.userHash = options.userHash;
-      var userId = Telegram.WebApp.initData && Telegram.WebApp.initData.user && Telegram.WebApp.initData.user.id || Kiizustore.userId;
-      console.log(userId)
-      if(options.debug) {
-        var userId = 5287896013; 
-      }
       $('body').show();
-      if (!userId) {
+      if (!Telegram.WebApp.initDataUnsafe ||
+        !Telegram.WebApp.initDataUnsafe.query_id) {
         Kiizustore.isClosed = true;
         $('body').addClass('closed');
         Kiizustore.showStatus('Kiizuha Store sedang tutup, coba kembali beberapa saat.');
@@ -37,32 +32,36 @@
       Telegram.WebApp.MainButton.setParams({
         text_color: '#fff'
       }).onClick(Kiizustore.mainBtnClicked);
+      Telegram.WebApp.BackButton.onClick(Kiizustore.backBtnClicked);
+      Telegram.WebApp.setHeaderColor('bg_color');
       initRipple();
     },
     eIncrClicked: function(e) {
-      console.log("eIncrClicked")
-      // e.preventDefault();
+      e.preventDefault();
+      Telegram.WebApp.HapticFeedback.impactOccurred('light');
       var itemEl = $(this).parents('.js-item');
       Kiizustore.incrClicked(itemEl, 1);
     },
     eDecrClicked: function(e) {
-      // e.preventDefault();
+      e.preventDefault();
+      Telegram.WebApp.HapticFeedback.impactOccurred('light');
       var itemEl = $(this).parents('.js-item');
       Kiizustore.incrClicked(itemEl, -1);
     },
     eEditClicked: function(e) {
-      // e.preventDefault();
+      e.preventDefault();
+      Kiizustore.toggleMode(false);
+    },
+    backBtnClicked: function() {
       Kiizustore.toggleMode(false);
     },
     getOrderItem: function(itemEl) {
-      console.log("getOrderItem")
       var id = itemEl.data('item-id');
       return $('.js-order-item').filter(function() {
         return ($(this).data('item-id') == id);
       });
     },
     updateItem: function(itemEl, delta) {
-      console.log("updateItem")
       var price = +itemEl.data('item-price');
       var count = +itemEl.data('item-count') || 0;
       var counterEl = $('.js-item-counter', itemEl);
@@ -102,26 +101,35 @@
     formatPrice: function(price) {
       return 'Rp' + price.toLocaleString("id-ID");
     },
+    updateBackgroundColor: function() {
+      var style = window.getComputedStyle(document.body);
+      var bg_color = parseColorToHex(style.backgroundColor || '#fff');
+      Telegram.WebApp.setBackgroundColor(bg_color);
+    },
     updateMainButton: function() {
       var mainButton = Telegram.WebApp.MainButton;
+      let css = window.getComputedStyle(document.body);
       if (Kiizustore.modeOrder) {
         if (Kiizustore.isLoading) {
           mainButton.setParams({
             is_visible: true,
-            color: '#65c36d'
+            color: css.getPropertyValue('--page-hint-color'),
+            is_active: false
           }).showProgress();
         } else {
           mainButton.setParams({
             is_visible: !!Kiizustore.canPay,
-            text: 'PAY ' + Kiizustore.formatPrice(Kiizustore.totalPrice),
-            color: '#31b545'
+            text: 'BAYAR ' + Kiizustore.formatPrice(Kiizustore.totalPrice),
+            color: css.getPropertyValue('--main-color'),
+            text_color: '#fff'
           }).hideProgress();
         }
       } else {
         mainButton.setParams({
           is_visible: !!Kiizustore.canPay,
-          text: 'VIEW ORDER',
-          color: '#31b545'
+          text: 'LIHAT PESANAN',
+          color: css.getPropertyValue('--main-color'),
+          text_color: '#fff'
         }).hideProgress();
       }
     },
@@ -202,19 +210,36 @@
           order_data: Kiizustore.getOrderData(),
           comment: comment
         };
-        if (!Telegram.WebApp.initData ||
-            !Telegram.WebApp.initData.user ||
-            !Telegram.WebApp.initData.user.id) {
-          params.user_id = Kiizustore.userId;
-          params.user_hash = Kiizustore.userHash;
+        if (Cafe.userId && Cafe.userHash) {
+          params.user_id = Cafe.userId;
+          params.user_hash = Cafe.userHash;
+        }
+        var invoiceSupported = Telegram.WebApp.isVersionAtLeast('6.1');
+        if (invoiceSupported) {
+          params.invoice = 1;
         }
         Kiizustore.toggleLoading(true);
         Kiizustore.apiRequest('makeOrder', params, function(result) {
           Kiizustore.toggleLoading(false);
           if (result.ok) {
-            Telegram.WebApp.close();
+            if (invoiceSupported) {
+              Telegram.WebApp.openInvoice(result.invoice_url, function(status) {
+                if (status == 'paid') {
+                  Telegram.WebApp.close();
+                } else if (status == 'failed') {
+                  Telegram.WebApp.HapticFeedback.notificationOccurred('error');
+                  Cafe.showStatus('Payment has been failed.');
+                } else {
+                  Telegram.WebApp.HapticFeedback.notificationOccurred('warning');
+                  Cafe.showStatus('You have cancelled this order.');
+                }
+              });
+            } else {
+              Telegram.WebApp.close();
+            }
           }
           if (result.error) {
+            Telegram.WebApp.HapticFeedback.notificationOccurred('error');
             Kiizustore.showStatus(result.error);
           }
         });
@@ -255,6 +280,25 @@
     }
   };
   
+  function parseColorToHex(color) {
+    color += '';
+    var match;
+    if (match = /^\s*#([0-9a-f]{6})\s*$/i.exec(color)) {
+      return '#' + match[1].toLowerCase();
+    }
+    else if (match = /^\s*#([0-9a-f])([0-9a-f])([0-9a-f])\s*$/i.exec(color)) {
+      return ('#' + match[1] + match[1] + match[2] + match[2] + match[3] + match[3]).toLowerCase();
+    }
+    else if (match = /^\s*rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+\.{0,1}\d*))?\)\s*$/.exec(color)) {
+      var r = parseInt(match[1]), g = parseInt(match[2]), b = parseInt(match[3]);
+      r = (r < 16 ? '0' : '') + r.toString(16);
+      g = (g < 16 ? '0' : '') + g.toString(16);
+      b = (b < 16 ? '0' : '') + b.toString(16);
+      return '#' + r + g + b;
+    }
+    return false;
+  }
+
   /*!
     Autosize 3.0.20
     license: MIT
