@@ -150,18 +150,20 @@ body.order-mode .items {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 550;
 }
 
 .item-price {
-  font-weight: 700;
+  margin-top: 5px;
   white-space: nowrap;
+  font-size: 10px;
 }
 
 .item-buttons {
   display: flex;
   width: 80px;
   justify-content: space-between;
-  margin: 10px auto 0;
+  margin: 5px auto 0;
   position: relative;
   transition: all var(--animation);
 }
@@ -174,7 +176,6 @@ button,
 .item-counter {
   display: inline-block;
   font-family: var(--default-font);
-  font-weight: 700;
   font-size: 14px;
   line-height: 18px;
   padding: 6px 16px;
@@ -184,7 +185,6 @@ button,
   background-color: var(--main-color);
   text-transform: uppercase;
   color: #fff;
-  outline: none;
   border: none;
 }
 
