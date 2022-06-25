@@ -1,0 +1,76 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #131313;
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+    left: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 630px;
+}
+
+.container .card {
+    position: relative;
+    padding-top: 70px;
+    padding-bottom: 85px;
+    padding-right: 70px;
+    padding-left: 70px;
+    background: #232323;
+    border-radius: 20px;
+    overflow: hidden;
+    display: inline;
+    justify-content: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.container .card .imgBx {
+    position: absolute;
+    top: 40px;
+}
+
+.container .card .imgBx img{
+    transform: translate(-50%, -50%);
+    width: 50px;
+  }
+  
+.container .card .contentBx{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    font-family: 'genshin';
+    transform: translate(-50%);
+}
+  
+.container .card .contentBx a{
+    display: inline-flex;
+    padding: 5px 10px;
+    background: #fff;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-decoration: none;
+    flex-wrap: wrap;
+    font-weight: 600;
+    color: #111;
+}
+
+.label {
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+    color: white;
+}
+
+@font-face {
+    font-family: 'genshin';
+    src: url('../font/genshin-ja-jp.ttf');
+}

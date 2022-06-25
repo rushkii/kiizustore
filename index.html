@@ -1,71 +1,288 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/telegram-web-app.js"></script>
-    <link rel="stylesheet" href="css/index.css?v=9">
-    <title>Kiizuha Store</title>
+  <meta charset="utf-8">
+  <title>Kiizuha Store Bot</title>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="MobileOptimized" content="176" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="robots" content="noindex, nofollow" />
+  <script src="js/telegram-web-app.js"></script>
+  <script>
+    function setThemeClass() {
+      document.documentElement.className = Telegram.WebApp.colorScheme;
+    }
+    Telegram.WebView.onEvent('theme_changed', setThemeClass);
+    setThemeClass();
+  </script>
+  <link href="css/index.css?v=10" rel="stylesheet">
 </head>
+
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="imgBx">
-                <img src="img/Genesis Crystal.png">
-            </div>
-            <div class="contentBx">
-                <div class="label">60</div>
-                <a href="#">Select</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <img src="img/Genesis Crystal.png">
-            </div>
-            <div class="contentBx">
-                <div class="label">300+30</div>
-                <a href="#">Select</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <img src="img/Genesis Crystal.png">
-            </div>
-            <div class="contentBx">
-                <div class="label">980+110</div>
-                <a href="#">Select</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <img src="img/Genesis Crystal.png">
-            </div>
-            <div class="contentBx">
-                <div class="label">3280+600</div>
-                <a href="#" onclick="getOrder">Select</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <img src="img/Genesis Crystal.png">
-            </div>
-            <div class="contentBx">
-                <div class="label">6480+1600</div>
-                <a href="#">Select</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="imgBx">
-                <img src="img/Blessing of the Welkin Moon.png">
-            </div>
-            <div class="contentBx">
-                <div class="label">Welkin Moon</div>
-                <a href="#">Select</a>
-            </div>
-        </div>
+  <section class="page items">
+    <div class="item js-item" data-item-id="GI60">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Genesis Crystal.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">60</div>
+        <div class="item-price">Rp13.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/index.js?v=4"></script>
+    <div class="item js-item" data-item-id="GI300">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Genesis Crystal.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">300+30</div>
+        <div class="item-price">Rp64.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
+    </div>
+    <div class="item js-item" data-item-id="GI980">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Genesis Crystal.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">980+110</div>
+        <div class="item-price">Rp188.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
+    </div>
+    <div class="item js-item" data-item-id="GI1980">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Genesis Crystal.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">1980+260</div>
+        <div class="item-price">Rp395.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
+    </div>
+    <div class="item js-item" data-item-id="GI3280">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Genesis Crystal.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">3280+600</div>
+        <div class="item-price">Rp605.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
+    </div>
+    <div class="item js-item" data-item-id="GI6480">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Genesis Crystal.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">6480+1600</div>
+        <div class="item-price">Rp1.220.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
+    </div>
+    <div class="item js-item" data-item-id="GIWLKN">
+      <div class="item-counter js-item-counter">1</div>
+      <div class="item-photo">
+        <picture class="item-icon js-item-icon">
+          <img src="img/Blessing of the Welkin Moon.png">
+      </div>
+      <div class="item-label">
+        <div class="item-title">Welkin Moon</div>
+        <div class="item-price">Rp64.000</div>
+      </div>
+      <div class="item-buttons">
+        <button class="item-decr-button js-item-decr-btn button-item ripple-handler">
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+        <button class="item-incr-button js-item-incr-btn button-item ripple-handler">
+          <span class="button-item-label">Add</span>
+          <span class="ripple-mask"><span class="ripple"></span></span>
+        </button>
+      </div>
+    </div>
+    <div class="item-shadow"></div>
+    <div class="item-shadow"></div>
+    <div class="item-shadow"></div>
+    <div class="item-shadow"></div>
+  </section>
+  <section class="page order-overview">
+    <div class="block">
+      <div class="order-header-wrap">
+        <h2 class="order-header">Your Order</h2>
+        <span class="order-edit js-order-edit">Edit</span>
+      </div>
+      <div class="order-items">
+        <div class="order-item js-order-item" data-item-id="GI60">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">60 <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Genesis Crystals</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp13.000</div>
+        </div>
+        <div class="order-item js-order-item" data-item-id="GI300">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">300+30 <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Genesis Crystals</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp64.000</div>
+        </div>
+        <div class="order-item js-order-item" data-item-id="GI980">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">980+110 <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Genesis Crystals</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp188.000</div>
+        </div>
+        <div class="order-item js-order-item" data-item-id="GI1980">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">1980+260 <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Genesis Crystals</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp395.000</div>
+        </div>
+        <div class="order-item js-order-item" data-item-id="GI3280">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">3280+600 <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Genesis Crystals</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp600.000</div>
+        </div>
+        <div class="order-item js-order-item" data-item-id="GI6480">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">6480+1600 <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Genesis Crystals</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp1.220.000</div>
+        </div>
+        <div class="order-item js-order-item" data-item-id="GIWLKN">
+          <div class="order-item-photo">
+            <picture class="item-icon js-item-icon">
+              <img src="img/Genesis Crystal.png">
+            </picture>
+          </div>
+          <div class="order-item-label">
+            <div class="order-item-title">Welkin Moon <span class="order-item-counter"><span
+                  class="js-order-item-counter">1</span>x</span></div>
+            <div class="order-item-description">Blessing of the Welkin Moon monthly</div>
+          </div>
+          <div class="order-item-price js-order-item-price">Rp13.000</div>
+        </div>
+      </div>
+    </div>
+    <div class="text-field-wrap">
+      <textarea class="text-field js-order-comment-field block" rows="1"
+        placeholder="Add comment…"></textarea>
+      <div class="text-field-hint">
+        Silahkan masukkan UID, Nickname dan Server kalian.
+      </div>
+    </div>
+  </section>
+  <div class="status-wrap">
+    <div class="status js-status"></div>
+  </div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/index.js?v=10"></script>
 </body>
+
 </html>
+<!-- page generated in 1.22ms -->
