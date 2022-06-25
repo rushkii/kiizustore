@@ -45,17 +45,17 @@
     },
     eIncrClicked: function(e) {
       console.log("eIncrClicked")
-      e.preventDefault();
+      // e.preventDefault();
       var itemEl = $(this).parents('.js-item');
       Kiizustore.incrClicked(itemEl, 1);
     },
     eDecrClicked: function(e) {
-      e.preventDefault();
+      // e.preventDefault();
       var itemEl = $(this).parents('.js-item');
       Kiizustore.incrClicked(itemEl, -1);
     },
     eEditClicked: function(e) {
-      e.preventDefault();
+      // e.preventDefault();
       Kiizustore.toggleMode(false);
     },
     getOrderItem: function(itemEl) {
