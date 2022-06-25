@@ -23,7 +23,7 @@
       var userId = Telegram.WebApp.initData && Telegram.WebApp.initData.user && Telegram.WebApp.initData.user.id || Kiizustore.userId;
       console.log(userId)
       if(options.debug) {
-        var userId = 2349000000; 
+        var userId = 5287896013; 
       }
       $('body').show();
       if (!userId) {
