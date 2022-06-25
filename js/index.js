@@ -15,6 +15,7 @@
     isLoading: false,
   
     init: function(options) {
+      console.log("READY")
       Telegram.WebApp.ready();
       Kiizustore.apiUrl = options.apiUrl;
       Kiizustore.userId = options.userId;
