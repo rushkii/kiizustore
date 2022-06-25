@@ -197,7 +197,7 @@
       if (!Kiizustore.canPay || Kiizustore.isLoading || Kiizustore.isClosed) {
         return false;
       }
-      if (Kiizustore.modeOrder) {
+      if (!Kiizustore.modeOrder) {
         var comment = $('.js-order-comment-field').val();
         var params = {
           order_data: Kiizustore.getOrderData(),
