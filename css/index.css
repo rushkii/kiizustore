@@ -12,7 +12,7 @@ body {
   min-width: 100%;
 
   --default-font: 'genshin';
-  /* --default-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; */
+  --apple-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --block-bg-color: var(--tg-theme-bg-color);
   --bg-color: #ebedf0;
   --animation: .15s ease;
@@ -336,6 +336,7 @@ body.order-mode .order-overview {
   font-size: 17px;
   line-height: 21px;
   text-transform: uppercase;
+  font-family: var(--apple-font);
   flex-grow: 1;
   padding: 0;
   margin: 0;
@@ -344,8 +345,9 @@ body.order-mode .order-overview {
 .order-edit {
   font-size: 15px;
   line-height: 18px;
-  font-weight: 500;
+  font-weight: 650;
   cursor: pointer;
+  font-family: var(--apple-font);
   color: var(--accent-color);
 }
 
@@ -382,19 +384,21 @@ body.order-mode .order-overview {
 .order-item-title {
   font-size: 15px;
   line-height: 18px;
-  font-weight: 700;
   padding: 3px 0;
   word-wrap: break-word;
 }
 
 .order-item-counter {
-  color: var(--main-color);
+  font-family: var(--apple-font);
+  font-weight: 650;
+  color: var(--accent-color);
 }
 
 .order-item-description {
   font-size: 14px;
   line-height: 17px;
-  font-weight: 500;
+  font-weight: 600;
+  font-family: var(--apple-font);
   -webkit-font-smoothing: antialiased;
   color: var(--page-hint-color);
   padding: 2px 0;
@@ -403,7 +407,6 @@ body.order-mode .order-overview {
 .order-item-price {
   font-size: 14px;
   line-height: 17px;
-  font-weight: 500;
   padding: 4px 0;
 }
 
@@ -451,10 +454,11 @@ body.order-mode .order-overview {
 
 .text-field::placeholder {
   text-overflow: ellipsis;
+  font-family: var(--apple-font);
 }
 
 .text-field-hint {
-  font-family: var(--default-font);
+  font-family: var(--apple-font);
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
