@@ -11,13 +11,14 @@
     apiUrl: "",
     userId: 0,
     userHash: "",
+    isClosed: false,
+    isLoading: false,
   
     init: function(options) {
       Telegram.WebApp.ready();
       Kiizustore.apiUrl = options.apiUrl;
       Kiizustore.userId = options.userId;
       Kiizustore.userHash = options.userHash;
-      Kiizustore.initLotties();
       var userId = Telegram.WebApp.initData && Telegram.WebApp.initData.user && Telegram.WebApp.initData.user.id || Kiizustore.userId;
       if(options.debug) {
         var userId = 2349000000; 
@@ -29,7 +30,6 @@
         Kiizustore.showStatus('Kiizuha Store sedang tutup, coba kembali beberapa saat.');
         return;
       }
-      $('.js-item-lottie').on('click', Kiizustore.eLottieClicked);
       $('.js-item-incr-btn').on('click', Kiizustore.eIncrClicked);
       $('.js-item-decr-btn').on('click', Kiizustore.eDecrClicked);
       $('.js-order-edit').on('click', Kiizustore.eEditClicked);
@@ -42,25 +42,11 @@
       }).onClick(Kiizustore.mainBtnClicked);
       initRipple();
     },
-    initLotties: function() {
-      $('.js-item-lottie').each(function() {
-        RLottie.init(this, {
-          maxDeviceRatio: 2,
-          cachingModulo: 3,
-          noAutoPlay: true
-        });
-      });
-    },
-    eLottieClicked: function(e) {
-      if (Kiizustore.isClosed) {
-        return false;
-      }
-      RLottie.playOnce(this);
-    },
     eIncrClicked: function(e) {
       e.preventDefault();
       var itemEl = $(this).parents('.js-item');
       Kiizustore.incrClicked(itemEl, 1);
+      console.log("eIncrClicked")
     },
     eDecrClicked: function(e) {
       e.preventDefault();
@@ -214,12 +200,12 @@
         anim_duration = 400;
       }
       if (mode_order) {
-        var height = $('.cafe-items').height();
+        var height = $('.items').height();
         $('.js-item-lottie').each(function() {
           RLottie.setVisible(this, false);
         });
-        $('.cafe-order-overview').show();
-        $('.cafe-items').css('maxHeight', height).redraw();
+        $('.order-overview').show();
+        $('.items').css('maxHeight', height).redraw();
         $('body').addClass('order-mode');
         $('.js-order-comment-field').each(function() {
           autosize.update(this);
@@ -236,8 +222,8 @@
         });
         $('body').removeClass('order-mode');
         setTimeout(function() {
-          $('.cafe-items').css('maxHeight', '');
-          $('.cafe-order-overview').hide();
+          $('.items').css('maxHeight', '');
+          $('.order-overview').hide();
           $('.js-item-lottie').each(function() {
             RLottie.setVisible(this, true);
           });
