@@ -20,6 +20,7 @@
       Kiizustore.userId = options.userId;
       Kiizustore.userHash = options.userHash;
       var userId = Telegram.WebApp.initData && Telegram.WebApp.initData.user && Telegram.WebApp.initData.user.id || Kiizustore.userId;
+      console.log(userId)
       if(options.debug) {
         var userId = 2349000000; 
       }
@@ -43,10 +44,10 @@
       initRipple();
     },
     eIncrClicked: function(e) {
+      console.log("eIncrClicked")
       e.preventDefault();
       var itemEl = $(this).parents('.js-item');
       Kiizustore.incrClicked(itemEl, 1);
-      console.log("eIncrClicked")
     },
     eDecrClicked: function(e) {
       e.preventDefault();
@@ -58,22 +59,19 @@
       Kiizustore.toggleMode(false);
     },
     getOrderItem: function(itemEl) {
+      console.log("getOrderItem")
       var id = itemEl.data('item-id');
       return $('.js-order-item').filter(function() {
         return ($(this).data('item-id') == id);
       });
     },
     updateItem: function(itemEl, delta) {
+      console.log("updateItem")
       var price = +itemEl.data('item-price');
       var count = +itemEl.data('item-count') || 0;
       var counterEl = $('.js-item-counter', itemEl);
       counterEl.text(count ? count : 1);
       var isSelected = itemEl.hasClass('selected');
-      if (!isSelected && count > 0) {
-        $('.js-item-lottie', itemEl).each(function() {
-          RLottie.playOnce(this);
-        });
-      }
       var anim_name = isSelected ? (delta > 0 ? 'badge-incr' : (count > 0 ? 'badge-decr' : 'badge-hide')) : 'badge-show';
       var cur_anim_name = counterEl.css('animation-name');
       if ((anim_name == 'badge-incr' || anim_name == 'badge-decr') && anim_name == cur_anim_name) {
@@ -93,6 +91,7 @@
       Kiizustore.updateTotalPrice();
     },
     incrClicked: function(itemEl, delta) {
+      console.log("incrClicked")
       if (Kiizustore.isLoading || Kiizustore.isClosed) {
         return false;
       }
@@ -105,36 +104,7 @@
       Kiizustore.updateItem(itemEl, delta);
     },
     formatPrice: function(price) {
-      return '$' + Kiizustore.formatNumber(price / 1000, 2, '.', ',');
-    },
-    formatNumber: function(number, decimals, decPoint, thousandsSep) {
-      number = (number + '').replace(/[^0-9+\-Ee.]/g, '')
-      var n = !isFinite(+number) ? 0 : +number
-      var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
-      var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep
-      var dec = (typeof decPoint === 'undefined') ? '.' : decPoint
-      var s = ''
-      var toFixedFix = function (n, prec) {
-        if (('' + n).indexOf('e') === -1) {
-          return +(Math.round(n + 'e+' + prec) + 'e-' + prec)
-        } else {
-          var arr = ('' + n).split('e')
-          var sig = ''
-          if (+arr[1] + prec > 0) {
-            sig = '+'
-          }
-          return (+(Math.round(+arr[0] + 'e' + sig + (+arr[1] + prec)) + 'e-' + prec)).toFixed(prec)
-        }
-      }
-      s = (prec ? toFixedFix(n, prec).toString() : '' + Math.round(n)).split('.')
-      if (s[0].length > 3) {
-        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)
-      }
-      if ((s[1] || '').length < prec) {
-        s[1] = s[1] || ''
-        s[1] += new Array(prec - s[1].length + 1).join('0')
-      }
-      return s.join(dec)
+      return 'Rp' + price.toLocaleString("id-ID");
     },
     updateMainButton: function() {
       var mainButton = Telegram.WebApp.MainButton;
@@ -201,9 +171,6 @@
       }
       if (mode_order) {
         var height = $('.items').height();
-        $('.js-item-lottie').each(function() {
-          RLottie.setVisible(this, false);
-        });
         $('.order-overview').show();
         $('.items').css('maxHeight', height).redraw();
         $('body').addClass('order-mode');
@@ -211,22 +178,10 @@
           autosize.update(this);
         });
         Telegram.WebApp.expand();
-        setTimeout(function() {
-          $('.js-item-lottie').each(function() {
-            RLottie.setVisible(this, true);
-          });
-        }, anim_duration);
-      } else {
-        $('.js-item-lottie').each(function() {
-          RLottie.setVisible(this, false);
-        });
         $('body').removeClass('order-mode');
         setTimeout(function() {
           $('.items').css('maxHeight', '');
           $('.order-overview').hide();
-          $('.js-item-lottie').each(function() {
-            RLottie.setVisible(this, true);
-          });
         }, anim_duration);
       }
       Kiizustore.updateMainButton();
