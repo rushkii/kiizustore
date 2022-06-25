@@ -174,12 +174,16 @@
           autosize.update(this);
         });
         Telegram.WebApp.expand();
+        Telegram.WebApp.BackButton.show();
+      }else{
         $('body').removeClass('order-mode');
         setTimeout(function() {
           $('.items').css('maxHeight', '');
           $('.order-overview').hide();
         }, anim_duration);
+        Telegram.WebApp.BackButton.hide();
       }
+      Kiizustore.updateBackgroundColor();
       Kiizustore.updateMainButton();
     },
     toggleLoading: function(loading) {
