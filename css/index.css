@@ -33,7 +33,8 @@ body {
 }
 
 html.dark body {
-  --block-bg-color: var(--tg-theme-bg-color);
+  --block-bg-color:
+  var(--tg-theme-bg-color);
   --bg-color: #0f0f0f;
   --text-color: #fff;
   --page-hint-color: #9b9ba1;
@@ -201,6 +202,7 @@ button,
   animation: var(--animation) both;
   pointer-events: none;
   z-index: 3;
+  font-family: var(--apple-font);
 }
 
 .item-incr-button {
@@ -209,10 +211,12 @@ button,
   right: 0;
   transition: width var(--animation);
   width: 80px;
+  /* background-color: #57e644; */
 }
 
 .selected .item-incr-button {
   width: 38px;
+  background-color: #57e644;
 }
 
 .item-decr-button {
@@ -343,7 +347,7 @@ body.order-mode .order-overview {
 }
 
 .order-edit {
-  font-size: 13px;
+  font-size: 15px;
   line-height: 18px;
   font-weight: 650;
   cursor: pointer;
@@ -437,11 +441,8 @@ body.order-mode .order-overview {
 }
 
 .input-box span {
-  position: absolute;
-  left: 50px;
-  bottom: 2px;
   opacity: 1;
-  padding: 10px;
+  padding: 0 10px;
   pointer-events: none;
   font-size: 1em;
   font-family: var(--apple-font);
@@ -450,11 +451,23 @@ body.order-mode .order-overview {
   transition: 0.5s;
 }
 
-.input-box input:valid ~ span#uid,
-.input-box input:focus ~ span#uid {
+span#uid {
+  position: absolute;
+  left: 55px;
+  bottom: 13px;
+}
+
+span#server {
+  position: absolute;
+  left: 44px;
+  bottom: 13px;
+}
+
+.input-box:nth-child(1) input:valid ~ span,
+.input-box:nth-child(1) input:focus ~ span {
   /* font-family: var(--apple-font); */
   opacity: 1;
-  transform: translateX(5px) translateY(-28.5px);
+  transform: translateY(-17.5px);
   font-size: 0.65em;
   padding: 0 10px;
   border-left: 1px solid
@@ -466,11 +479,11 @@ body.order-mode .order-overview {
   color: var(--block-bg-color);
 }
 
-.input-box input:valid ~ span#server,
-.input-box input:focus ~ span#server {
+.input-box:nth-child(2) input:valid ~ span,
+.input-box:nth-child(2) input:focus ~ span {
   /* font-family: var(--apple-font); */
   opacity: 1;
-  transform: translateX(-5px) translateY(-28.5px);
+  transform: translateX(3px) translateY(-17.5px);
   font-size: 0.65em;
   padding: 0 10px;
   border-left: 1px solid
@@ -480,6 +493,14 @@ body.order-mode .order-overview {
   letter-spacing: .2em;
   background: var(--main-color);
   color: var(--block-bg-color);
+}
+
+.input-box:nth-child(1) input:valid ~ span,
+.input-box:nth-child(1) input:focus ~ span {
+  display: block;
+  background: var(--main-color);
+  color: var(--block-bg-color);
+  border-radius: 2px;
 }
 
 .input-box:nth-child(2) input:valid ~ span,
@@ -607,12 +628,17 @@ body.order-mode .order-overview {
   text-overflow: ellipsis;
   vertical-align: top;
   position: relative;
+  font-family: var(--apple-font);
+  font-weight: 600;
   z-index: 1;
 }
 
-.item-add-button .ripple,
+.selected .item-incr-button .ripple {
+  background-color: #4ecc3d;
+}
+
 .item-incr-button .ripple {
-  background-color: #ed960b;
+  background-color: #2286d8;
 }
 
 .item-decr-button .ripple {
