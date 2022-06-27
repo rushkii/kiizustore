@@ -25,6 +25,8 @@ var Kiizustore = {
     $('.js-item-incr-btn').on('click', Kiizustore.eIncrClicked);
     $('.js-item-decr-btn').on('click', Kiizustore.eDecrClicked);
     $('.js-order-edit').on('click', Kiizustore.eEditClicked);
+    $('.js-order-uid-input').on('change', Kiizustore.onTypingListen);
+    $('.js-order-server-input').on('change', Kiizustore.onTypingListen);
     $('.js-status').on('click', Kiizustore.eStatusClicked);
     $('.text-field').on('input', (e) => {
       if (e.value.length > e.maxLength) e.value = e.value.slice(0, e.maxLength);
@@ -60,6 +62,28 @@ var Kiizustore = {
     return $('.js-order-item').filter(function() {
       return ($(this).data('item-id') == id);
     });
+  },
+  onTypingListen: () => {
+    console.log('onTypingListen')
+    if ($(".js-order-uid-input").val() != "" && $(".js-order-server-input").val() != "") {
+      Kiizustore.validateForm();
+    }
+  },
+  validateForm: () => {
+    let params = {
+      uid: 830443653,
+      server: "os_asia"
+    }
+    Kiizustore.apiRequest('/validate', params, function(result) {
+      if (result.ok) {
+        mainButton.setParams({
+          is_visible: !!Kiizustore.canPay,
+          text: 'BAYAR ' + Kiizustore.formatPrice(Kiizustore.totalPrice),
+          color: css.getPropertyValue('--main-color'),
+          text_color: css.getPropertyValue('--bg-color')
+        }).hideProgress();
+      }
+    })
   },
   updateItem: function(itemEl, delta) {
     var price = +itemEl.data('item-price');
@@ -202,14 +226,15 @@ var Kiizustore = {
       return false;
     }
     if (Kiizustore.modeOrder) {
-      var comment = $('.js-order-comment-field').val();
+      var uid = $('.js-order-uid-input').val();
+      var server = $('.js-order-server-input').val();
       var params = {
-        order_data: Kiizustore.getOrderData(),
-        comment: comment
+        uid: uid,
+        server: server
       };
-      if (Cafe.userId && Cafe.userHash) {
-        params.user_id = Cafe.userId;
-        params.user_hash = Cafe.userHash;
+      if (Kiizustore.userId && Kiizustore.userHash) {
+        params.user_id = Kiizustore.userId;
+        params.user_hash = Kiizustore.userHash;
       }
       var invoiceSupported = Telegram.WebApp.isVersionAtLeast('6.1');
       if (invoiceSupported) {
@@ -225,10 +250,10 @@ var Kiizustore = {
                 Telegram.WebApp.close();
               } else if (status == 'failed') {
                 Telegram.WebApp.HapticFeedback.notificationOccurred('error');
-                Cafe.showStatus('Payment has been failed.');
+                Kiizustore.showStatus('Payment has been failed.');
               } else {
                 Telegram.WebApp.HapticFeedback.notificationOccurred('warning');
-                Cafe.showStatus('You have cancelled this order.');
+                Kiizustore.showStatus('You have cancelled this order.');
               }
             });
           } else {
