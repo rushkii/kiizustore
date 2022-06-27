@@ -64,11 +64,9 @@ var Kiizustore = {
     });
   },
   onTypingListen: () => {
-    console.log(Kiizustore.canPay)
+    console.log('onTypingListen')
     if ($(".js-order-uid-input").val() != "" && $(".js-order-server-input").val() != "") {
-      // Kiizustore.validateForm();
-      Kiizustore.canPay = true
-      Kiizustore.updateMainButton()
+      Kiizustore.validateForm();
     }
   },
   validateForm: () => {
@@ -167,7 +165,7 @@ var Kiizustore = {
       var count = +itemEl.data('item-count') || 0;
       total_price += price * count;
     });
-    // Kiizustore.canPay = total_price > 0;
+    Kiizustore.canPay = total_price > 0;
     Kiizustore.totalPrice = total_price;
     Kiizustore.updateMainButton();
   },
