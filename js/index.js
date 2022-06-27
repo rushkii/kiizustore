@@ -11,24 +11,27 @@
   
     init: function(options) {
       Telegram.WebApp.ready();
-      Kiizustore.apiUrl = options.apiUrl;
+      Kiizustore.apiUrl = "https://kiizustore.herokuapp.com/api";
       Kiizustore.userId = options.userId;
       Kiizustore.userHash = options.userHash;
       $('body').show();
-      if (!Telegram.WebApp.initDataUnsafe ||
-        !Telegram.WebApp.initDataUnsafe.query_id) {
-        Kiizustore.isClosed = true;
-        $('body').addClass('closed');
-        Kiizustore.showStatus('Kiizuha Store sedang tutup, coba kembali beberapa saat.');
-        return;
-      }
+      // if (!Telegram.WebApp.initDataUnsafe ||
+      //   !Telegram.WebApp.initDataUnsafe.query_id) {
+      //   Kiizustore.isClosed = true;
+      //   $('body').addClass('closed');
+      //   Kiizustore.showStatus('Kiizuha Store sedang tutup, coba kembali beberapa saat.');
+      //   return;
+      // }
       $('.js-item-incr-btn').on('click', Kiizustore.eIncrClicked);
       $('.js-item-decr-btn').on('click', Kiizustore.eDecrClicked);
       $('.js-order-edit').on('click', Kiizustore.eEditClicked);
       $('.js-status').on('click', Kiizustore.eStatusClicked);
-      $('.js-order-comment-field').each(function() {
-        autosize(this);
-      });
+      // $('.js-order-comment-field').each(function() {
+      //   autosize(this);
+      // });
+      $('.text-field').on('input', (e) => {
+        if (e.value.length > e.maxLength) e.value = e.value.slice(0, e.maxLength);
+      })
       Telegram.WebApp.MainButton.setParams({
         text_color: '#fff'
       }).onClick(Kiizustore.mainBtnClicked);
@@ -178,9 +181,9 @@
         $('.order-overview').show();
         $('.items').css('maxHeight', height).redraw();
         $('body').addClass('order-mode');
-        $('.js-order-comment-field').each(function() {
-          autosize.update(this);
-        });
+        // $('.js-order-comment-field').each(function() {
+        //   autosize.update(this);
+        // });
         Telegram.WebApp.expand();
         Telegram.WebApp.BackButton.show();
       }else{

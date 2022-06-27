@@ -19,7 +19,7 @@
     Telegram.WebView.onEvent('theme_changed', setThemeClass);
     setThemeClass();
   </script>
-  <link href="css/index.css?v=12" rel="stylesheet">
+  <link href="css/index.css?v=16" rel="stylesheet">
 </head>
 
 <body>
@@ -172,7 +172,7 @@
   <section class="page order-overview">
     <div class="block">
       <div class="order-header-wrap">
-        <h2 class="order-header">Your Order</h2>
+        <h2 class="order-header">Total pesanan</h2>
         <span class="order-edit js-order-edit">Edit</span>
       </div>
       <div class="order-items">
@@ -270,10 +270,22 @@
       </div>
     </div>
     <div class="text-field-wrap">
-      <textarea class="text-field js-order-comment-field block" rows="1"
-        placeholder="Add comment…"></textarea>
+      <div class="input-form-wrap">
+        <div class="input-box">
+          <input 
+            class="js-order-comment-field block" 
+            
+            type="number"
+            required>
+            <span class="block">UID</span>
+        </div>
+        <div class="input-box">
+          <input required>
+          <span class="block">Server</span>
+        </div>
+      </div>
       <div class="text-field-hint">
-        Silahkan masukkan UID, Nickname dan Server kalian.
+        Silahkan masukkan UID dan Server.
       </div>
     </div>
   </section>
@@ -281,8 +293,8 @@
     <div class="status js-status"></div>
   </div>
   <script src="js/jquery.min.js"></script>
-  <script src="js/index.js?v=15"></script>
-  <script>Kiizustore.init({"apiUrl": "https://kiizuha.herokuapp.com/api", "userId": 0, "userHash": null, "debug": true});</script>
+  <script src="js/index.js?v=16"></script>
+  <script>Kiizustore.init({"userId": 0, "userHash": null});</script>
 </body>
 
 </html>
